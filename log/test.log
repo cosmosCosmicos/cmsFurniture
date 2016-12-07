@@ -1,0 +1,72 @@
+  [1m[36m (72.0ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (23.0ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateSections (20161109192217)
+  [1m[35m (7.0ms)[0m  CREATE TABLE `sections` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (23.0ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20161109192217')
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePages (20161109192548)
+  [1m[35m (6.0ms)[0m  CREATE TABLE `pages` (`id` int(11) auto_increment PRIMARY KEY, `title` varchar(255), `section_id` int(11), `body` text, `order` int(11), `is_published` tinyint(1), `menu_display` tinyint(1), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20161109192548')
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreateBlocks (20161109193002)
+  [1m[35m (6.0ms)[0m  CREATE TABLE `blocks` (`id` int(11) auto_increment PRIMARY KEY, `title` varchar(255), `body` text, `position` varchar(255), `display` varchar(255), `show_title` tinyint(1), `class_suffix` varchar(255), `is_published` tinyint(1), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20161109193002')
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.0ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+  [1m[36m (0.0ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'railscms_test'
+  AND fk.table_name = 'blocks'
+[0m
+  [1m[35m (0.0ms)[0m  SHOW CREATE TABLE `blocks`
+  [1m[36m (0.0ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'railscms_test'
+  AND fk.table_name = 'pages'
+[0m
+  [1m[35m (1.0ms)[0m  SHOW CREATE TABLE `pages`
+  [1m[36m (0.0ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'railscms_test'
+  AND fk.table_name = 'sections'
+[0m
+  [1m[35m (0.0ms)[0m  SHOW CREATE TABLE `sections`
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (1.0ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.0ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36mFixture Delete (13.0ms)[0m  [1mDELETE FROM `blocks`[0m
+  [1m[35mFixture Insert (21.0ms)[0m  INSERT INTO `blocks` (`title`, `body`, `position`, `display`, `show_title`, `class_suffix`, `is_published`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', 'MyString', 'MyString', 0, 'MyString', 0, '2016-11-09 19:47:48', '2016-11-09 19:47:48', 980190962)
+  [1m[36mFixture Insert (1.0ms)[0m  [1mINSERT INTO `blocks` (`title`, `body`, `position`, `display`, `show_title`, `class_suffix`, `is_published`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', 'MyString', 'MyString', 0, 'MyString', 0, '2016-11-09 19:47:48', '2016-11-09 19:47:48', 298486374)[0m
+  [1m[35mFixture Delete (0.0ms)[0m  DELETE FROM `pages`
+  [1m[36mFixture Insert (1.0ms)[0m  [1mINSERT INTO `pages` (`title`, `section_id`, `body`, `order`, `is_published`, `menu_display`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 1, 'MyText', 1, 0, 0, '2016-11-09 19:47:48', '2016-11-09 19:47:48', 980190962)[0m
+  [1m[35mFixture Insert (0.0ms)[0m  INSERT INTO `pages` (`title`, `section_id`, `body`, `order`, `is_published`, `menu_display`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 1, 'MyText', 1, 0, 0, '2016-11-09 19:47:48', '2016-11-09 19:47:48', 298486374)
+  [1m[36mFixture Delete (0.0ms)[0m  [1mDELETE FROM `sections`[0m
+  [1m[35mFixture Insert (1.0ms)[0m  INSERT INTO `sections` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-11-09 19:47:48', '2016-11-09 19:47:48', 980190962)
+  [1m[36mFixture Insert (0.0ms)[0m  [1mINSERT INTO `sections` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-11-09 19:47:48', '2016-11-09 19:47:48', 298486374)[0m
+  [1m[35m (1.0ms)[0m  COMMIT
+  [1m[36m (0.0ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+----------------------------------------
+HomeControllerTest: test_should_get_show
+----------------------------------------
+Processing by HomeController#show as HTML
+  Rendered home/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 415ms (Views: 414.3ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mROLLBACK[0m
